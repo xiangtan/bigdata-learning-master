@@ -16,6 +16,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
+ * 47.98.108.252 node-1
+ * 39.105.29.24 node-2
  * Unit test for simple App.
  */
 public class AppTest {
