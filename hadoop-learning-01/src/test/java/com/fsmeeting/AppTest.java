@@ -27,14 +27,15 @@ public class AppTest {
     @Before
     public void init() throws URISyntaxException, IOException, InterruptedException {
         Configuration conf = new Configuration();
+        //conf.set("dfs.replication", "0");
         //System.setProperty("HADOOP_USER_NAME","root");
         //conf.set("fs.defaultFS","hdfs://node-1:9000");
-        fileSystem = FileSystem.get(new URI("hdfs://node-2:9000"), conf, "root");
+        fileSystem = FileSystem.get(new URI("hdfs://node-2.example.com:9000/"), conf, "root");
     }
 
     @Test
     public void testExists() throws IOException {
-        Path path = new Path("/test01.md");
+        Path path = new Path("/fsmeeting/pome.txt");
         System.out.println(fileSystem.exists(path));
     }
 
@@ -63,9 +64,18 @@ public class AppTest {
      */
     @Test
     public void testDownload() throws IOException {
-        InputStream in = fileSystem.open(new Path("/test01.md"));
-        OutputStream out = new FileOutputStream("d://test//tmp01.txt");
+        InputStream in = fileSystem.open(new Path("/1.txt"));
+        OutputStream out = new FileOutputStream("x://test//tmp088.txt");
         IOUtils.copyBytes(in, out, 1024, true);
+    }
+
+    /**
+     * hdfs 2 local file system
+     */
+    @Test
+    public void testDownload1() throws IOException {
+
+        fileSystem.copyToLocalFile(false, new Path("/up.txt"), new Path("x://test//tmp099.txt"), true);
     }
 
     @Test
@@ -87,7 +97,7 @@ public class AppTest {
      */
     @Test
     public void testGetFileStatus() throws IOException {
-        Path path = new Path("/1.txt");
+        Path path = new Path("/up.txt");
         FileStatus status = fileSystem.getFileStatus(path);
         System.out.println(status.getModificationTime());
     }
