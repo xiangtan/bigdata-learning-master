@@ -30,7 +30,8 @@ public class AppTest {
         //conf.set("dfs.replication", "0");
         //System.setProperty("HADOOP_USER_NAME","root");
         //conf.set("fs.defaultFS","hdfs://node-1:9000");
-        fileSystem = FileSystem.get(new URI("hdfs://node-2.example.com:9000/"), conf, "root");
+        //fileSystem = FileSystem.get(new URI("hdfs://node-1.example.com:9000/"), conf, "root");
+        fileSystem = FileSystem.get(new URI("hdfs://node-1:9000/"), conf, "root");
     }
 
     @Test
@@ -81,7 +82,7 @@ public class AppTest {
     @Test
     public void testUpload() throws IOException {
 
-        fileSystem.copyFromLocalFile(new Path("x://test//up.txt"), new Path("/"));
+        fileSystem.copyFromLocalFile(new Path("e://postClientData.jmx"), new Path("/"));
     }
 
     @Test
